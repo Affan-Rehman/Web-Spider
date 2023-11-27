@@ -45,6 +45,7 @@ class WebSpider
             }
         }
     }
+    
     //Fetching Page Content
         private function fetchPage($url)
     {
@@ -63,5 +64,23 @@ class WebSpider
         curl_close($curl);
         return $content;
     }
-    //
+    
+    //Extracting URLs
+        private function extractUrls($content)
+    {
+        $extractedUrls = [];
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($content);
+
+        $anchors = $dom->getElementsByTagName('a');
+        foreach ($anchors as $anchor) {
+            $href = $anchor->getAttribute('href');
+            if (strpos($href, 'http') === 0) {
+                $extractedUrls[] = $href;
+            }
+        }
+
+        return $extractedUrls;
+    }
 }
