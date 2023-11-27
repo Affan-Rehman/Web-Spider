@@ -45,6 +45,23 @@ class WebSpider
             }
         }
     }
+    //Fetching Page Content
+        private function fetchPage($url)
+    {
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 
-    // Other methods will be added incrementally...
+        $content = curl_exec($curl);
+        if (!$content) {
+            $error = curl_error($curl);
+            echo "Error fetching page: $error\n";
+            return null;
+        }
+
+        curl_close($curl);
+        return $content;
+    }
+    //
 }
