@@ -28,7 +28,7 @@ Welcome to `index.php`! This PHP script is a web crawler designed to traverse we
 To crawl a different website, modify the seed URL in the `WebSpider` instantiation:
 ```php
 $spider = new WebSpider('https://newwebsite.com', 3);
-```
+
 
 #Study Material
 
