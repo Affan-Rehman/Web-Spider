@@ -108,4 +108,23 @@ class WebSpider
 
         return $extractedInfo;
     }
+
+    //Now simply displaying retrieved data
+    private function displayInfo($url, $extractedInfo)
+    {
+        echo "URL: " . $url . "\n";
+        if (isset($extractedInfo['title'])) {
+            echo "Title: " . $extractedInfo['title'] . "\n";
+        }
+        if (isset($extractedInfo['metaDescription'])) {
+            echo "Meta Description: " . $extractedInfo['metaDescription'] . "\n";
+        }
+
+
+        echo "\n";
+    }
 }
+
+// Now usage
+$spider = new WebSpider('https://www.google.com.pk/', 3);
+$spider->crawl();
