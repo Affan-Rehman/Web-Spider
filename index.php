@@ -83,4 +83,29 @@ class WebSpider
 
         return $extractedUrls;
     }
+
+    //Extracting info
+        private function extractInfo($content)
+    {
+        $extractedInfo = [];
+
+        $dom = new DOMDocument();
+        @$dom->loadHTML($content);
+
+        $titleElement = $dom->getElementsByTagName('title');
+        if ($titleElement->length > 0) {
+            $extractedInfo['title'] = $titleElement->item(0)->textContent;
+        }
+
+        $metaDescriptionElement = $dom->getElementsByTagName('meta');
+        foreach ($metaDescriptionElement as $element) {
+            if ($element->getAttribute('name') === 'description') {
+                $extractedInfo['metaDescription'] = $element->getAttribute('content');
+                break;
+            }
+        }
+
+
+        return $extractedInfo;
+    }
 }
